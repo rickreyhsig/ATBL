@@ -6,7 +6,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <!-- Latest compiled and minified JavaScript  for dropdown -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
  <script>
   $( function() {
     var availableCities = [
@@ -17,8 +17,7 @@
       "Bladensburg",
       "Brunswick",
       "Hagerstown",
-      "Gaithersburg",
-      "Rockville",
+      "Gaithersburg", "Rockville",
       "Silver Spring",
       "Washington D.C."
     ];
@@ -30,41 +29,31 @@
 
 <h1>What's on the bucketlist?</h1>
 
-<span class="dropdown">
-  <!--<button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">I'd like to.. -->
-  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="margin: 0 0 2px 0;">I'd like to..
-  <span class="caret"></span></button>
-  <ul class="dropdown-menu">
-    <li><a href="#">Eat/Drink</a></li>
-    <li><a href="#">Explore</a></li>
-  </ul>
-</span>
+<%= form_tag cities_path, :method => 'get', :id => "cities_search" do %>
+  <%#= hidden_field_tag :direction, params[:direction] %>
+  <%= hidden_field_tag :sort, params[:sort] %>
+		<!--<span class="dropdown">
+		<span class="dropdown">
+			<span class="caret"></span></button>
+			<ul class="dropdown-menu">
+				<li><a href="#">Eat/Drink</a></li>
+				<li><a href="#">Explore</a></li>
+			</ul>
+		</span> -->
 
-<span class="ui-widget">
-  <input id="cities" placeholder="in.." style="height:38px;">
-</span>
+		<span class="dropdown">
+      <%= select_tag :category, options_for_select(City::CATEGORIES), prompt: "I'd like to..", class: 'btn btn-default dropdown-toggle', style: 'margin: 0 0 2px 0;' %>
+		</span>
+		<span class="ui-widget">
+    <%= text_field_tag :city, params[:search], id: 'cities', class: 'ui-autocomplete-input', style: 'height:38px;', placeholder: 'in..' %>
+		</span>
+    <%#= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil, class: "btn btn-default", style: "padding: 7px 5px 7px 5px; margin-top: -3px;" %>
+<% end %>
 
-
-<!--<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @cities.each do |city| %>
-      <tr>
-        <td><%= city.name %></td>
-        <td><%= link_to 'Show', city %></td>
-        <td><%= link_to 'Edit', edit_city_path(city) %></td>
-        <td><%= link_to 'Destroy', city, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New City', new_city_path %> -->
+<% if @city %>
+  <p> <strong>City Name:</strong> <%= @city.name %> </p>
+  <p> <strong>Category:</strong> <%= params[:category] %> </p>
+<% else %>
+  <p> <strong>Please search for a city</strong> </p>
+<% end %>

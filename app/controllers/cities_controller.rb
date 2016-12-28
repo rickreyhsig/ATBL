@@ -5,11 +5,13 @@ class CitiesController < ApplicationController
   # GET /cities.json
   def index
     @cities = City.all
+    @city = City.where(name: params[:city]).first
   end
 
   # GET /cities/1
   # GET /cities/1.json
   def show
+    #@city = City.where(name: 'Silver Spring').first
   end
 
   # GET /cities/new
