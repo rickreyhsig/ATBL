@@ -1,8 +1,51 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Cities</h1>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!--<link rel="stylesheet" href="/resources/demos/style.css">-->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<table>
+<!-- Latest compiled and minified JavaScript  for dropdown -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+ <script>
+  $( function() {
+    var availableCities = [
+      "Annapolis",
+      "Aberdeen",
+      "Baltimore",
+      "Berwyn Heights",
+      "Bladensburg",
+      "Brunswick",
+      "Hagerstown",
+      "Gaithersburg",
+      "Rockville",
+      "Silver Spring",
+      "Washington D.C."
+    ];
+    $( "#cities" ).autocomplete({
+      source: availableCities
+    });
+  } );
+  </script>
+
+<h1>What's on the bucketlist?</h1>
+
+<span class="dropdown">
+  <!--<button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">I'd like to.. -->
+  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="margin: 0 0 2px 0;">I'd like to..
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Eat/Drink</a></li>
+    <li><a href="#">Explore</a></li>
+  </ul>
+</span>
+
+<span class="ui-widget">
+  <input id="cities" placeholder="in.." style="height:38px;">
+</span>
+
+
+<!--<table>
   <thead>
     <tr>
       <th>Name</th>
@@ -24,4 +67,4 @@
 
 <br>
 
-<%= link_to 'New City', new_city_path %>
+<%= link_to 'New City', new_city_path %> -->
