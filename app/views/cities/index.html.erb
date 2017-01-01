@@ -9,55 +9,57 @@
 <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
  <script>
   $( function() {
-    var availableCities = [
-      "Annapolis",
-      "Aberdeen",
-      "Baltimore",
-      "Berwyn Heights",
-      "Bladensburg",
-      "Brunswick",
-      "Hagerstown",
-      "Gaithersburg", "Rockville",
-      "Silver Spring",
-      "Washington D.C."
-    ];
-    $( "#cities" ).autocomplete({
-      source: availableCities
-    });
-  } );
-  </script>
+	var availableCities = [
+		"Annapolis",
+		"Aberdeen",
+		"Baltimore",
+		"Berwyn Heights",
+		"Bladensburg",
+		"Brunswick",
+		"Hagerstown",
+		"Gaithersburg", "Rockville",
+		"Silver Spring",
+		"Washington D.C."
+	];
+	$( "#cities" ).autocomplete({
+		source: availableCities
+	});
+} );
+</script>
 
 <h1>What's on the bucketlist?</h1>
 
 <%= form_tag cities_path, :method => 'get', :id => "cities_search" do %>
-  <%#= hidden_field_tag :direction, params[:direction] %>
-  <%= hidden_field_tag :sort, params[:sort] %>
-		<!--<span class="dropdown">
-		<span class="dropdown">
-			<span class="caret"></span></button>
-			<ul class="dropdown-menu">
-				<li><a href="#">Eat/Drink</a></li>
-				<li><a href="#">Explore</a></li>
-			</ul>
-		</span> -->
+<%#= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+	<!--<span class="dropdown">
+	<span class="dropdown">
+		<span class="caret"></span></button>
+		<ul class="dropdown-menu">
+			<li><a href="#">Eat/Drink</a></li>
+			<li><a href="#">Explore</a></li>
+		</ul>
+	</span> -->
 
-		<span class="dropdown">
-      <%= select_tag :category, options_for_select(City::CATEGORIES), prompt: "I'd like to..", class: 'btn btn-default dropdown-toggle', style: 'margin: 0 0 2px 0;' %>
-		</span>
-		<span class="ui-widget">
-    <%= text_field_tag :city, params[:search], id: 'cities', class: 'ui-autocomplete-input', style: 'height:38px;', placeholder: 'in..' %>
-		</span>
-    <%#= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil, class: "btn btn-default", style: "padding: 7px 5px 7px 5px; margin-top: -3px;" %>
+	<span class="dropdown">
+		<%= select_tag :category, options_for_select(City::CATEGORIES), prompt: "I'd like to..", class: 'btn btn-default dropdown-toggle', style: 'margin: 0 0 2px 0;' %>
+	</span>
+	<span class="ui-widget">
+	<%= text_field_tag :city, params[:search], id: 'cities', class: 'ui-autocomplete-input', style: 'height:38px;', placeholder: 'in..' %>
+	</span>
+	<%#= text_field_tag :search, params[:search] %>
+	<%= submit_tag "Search", :name => nil, class: "btn btn-default", style: "padding: 7px 5px 7px 5px; margin-top: -3px;" %>
 <% end %>
 
 <% if @city %>
-  <p> <strong>City Name:</strong> <%= @city.name %> </p>
-  <p> <strong>Category:</strong> <%= params[:category] %> </p>
+<p> <strong>City Name:</strong> <%= @city.name %> </p>
+<p> <strong>Category:</strong> <%= params[:category] %> </p>
 <% else %>
-  <p> <strong>Please search for a city</strong> </p>
+<p> <strong>Please search for a city</strong> </p>
 <% end %>
 <hr>
+
+<%= Attraction.where(city_id: 1).inspect %>
 
 <script>
 var locations = [

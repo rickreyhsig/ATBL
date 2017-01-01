@@ -22,7 +22,12 @@
 
 <p>
   <strong>City:</strong>
-  <%= @attraction.city_id %>
+  <%= City.find(@attraction.city_id).name if @attraction.city_id %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @attraction.category %>
 </p>
 
 <%= link_to 'Edit', edit_attraction_path(@attraction) %> |

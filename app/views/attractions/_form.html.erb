@@ -28,9 +28,14 @@
     <%= f.text_field :long %>
   </div>
   <div class="field">
-    <%= f.label :city_id %><br>
-    <%= f.number_field :city_id %>
+    <%= f.label :city_id, "City" %><br>
+    <%= f.select :city_id, options_for_select(City.all.pluck(:name, :id)) %>
+    <%#= f.number_field :city_id %>
   </div>
+  <div class="field">
+    <%= f.label :category %><br>
+    <%= f.select :category, options_for_select(City::CATEGORIES) %>
+  </div> </br>
   <div class="actions">
     <%= f.submit %>
   </div>
