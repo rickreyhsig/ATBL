@@ -1,3 +1,3 @@
 class City < ActiveRecord::Base
-  CATEGORIES = [['Unique things', 'Unique things'], ['Restaurants', 'Restaurants'], ['Bars/Clubs', 'Bars/Clubs'], ['Coffe/Tea','Coffe/Tea'], ['Transportation', 'Transportation'], ['Things to Do', 'Things to Do']]
+  CATEGORIES = [['Unique things', 'Unique things'], ['Restaurants', 'Restaurants'], ['Bars/Clubs', 'Bars/Clubs'], ['Coffee/Tea','Coffee/Tea'], ['Transportation', 'Transportation'], ['Things to Do', 'Things to Do']]
 end
