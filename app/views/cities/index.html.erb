@@ -52,35 +52,47 @@
 <% end %>
 
 <% if @city %>
-<p> <strong>City Name:</strong> <%= @city.name %> </p>
+<p> <strong>City:</strong> <%= @city.name %> </p>
 <p> <strong>Category:</strong> <%= params[:category] %> </p>
 <% else %>
 <p> <strong>Please search for a city</strong> </p>
 <% end %>
 <hr>
 
-<%= Attraction.where(city_id: 1).inspect %>
-
-<script>
-var locations = [
-];
-</script>
-
-<div id="map_wrapper">
+<div id="map_wrapper_right">
   <div id="map"></div>
 </div>
+
+<script>
+  var locations = [];
+</script>
+
+<div id="map_wrapper_left">
+  <% attractions = Attraction.where(city_id: 1) %>
+      <ul>
+        <% attractions.each do |attraction| %>
+          <li>
+            <%= attraction.name %>:
+            <%= attraction.address %>
+          </li>
+          <script>
+            locations.push([ '<%= attraction.name %>', <%= attraction.lat %> , <%= attraction.long %>, <%= attraction.id %> ])
+          </script>
+        <% end %>
+      </ul>
+</div>
+
 
    <script type="text/javascript">
     $(function loadScript(){
 
-		var locations = [];
      /*var locations = [
        ['Bondi Beach', -33.890542, 151.274856, 4],
        ['Maroubra Beach', -33.950198, 151.259302, 1]
      ]; */
 
      var map = new google.maps.Map(document.getElementById('map'), {
-       zoom: 11,
+       zoom: 13,
        center: new google.maps.LatLng(38.989818,-77.022674),
 			 mapTypeId: 'roadmap'
      });
@@ -88,22 +100,13 @@ var locations = [
      var infowindow = new google.maps.InfoWindow();
 
      var marker, i;
-
+     var lightBluePin = new google.maps.MarkerImage("https://maps.google.com/mapfiles/ms/micons/ltblue-dot.png");
      for (i = 0; i < locations.length; i++) {
-       if (locations[i][3] == 'new'){
-         marker = new google.maps.Marker({
-           position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-           map: map,
-           icon: greenPin
-         });
-       }else{  // vehicle_type == 'used'
-         marker = new google.maps.Marker({
-           position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-           map: map,
-           icon: yellowPin
-         });
-       }
-
+       marker = new google.maps.Marker({
+         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+         map: map,
+         icon: lightBluePin
+       });
        google.maps.event.addListener(marker, 'click', (function(marker, i) {
          return function() {
            infowindow.setContent(locations[i][0]);
@@ -117,11 +120,18 @@ var locations = [
    </script>
 
    <style>
-   #map_wrapper {
+   #map_wrapper_right {
      height: 380px;
 		 width: 50%;
      float: right;
    }
+
+   #map_wrapper_left {
+     height: 380px;
+		 width: 50%;
+     float: left;
+   }
+
 
    #map {
        width: 100%;
