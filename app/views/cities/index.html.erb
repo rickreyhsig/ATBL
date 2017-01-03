@@ -4,18 +4,7 @@
 <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
  <script>
   $( function() {
-	var availableCities = [
-		"Annapolis",
-		"Aberdeen",
-		"Baltimore",
-		"Berwyn Heights",
-		"Bladensburg",
-		"Brunswick",
-		"Hagerstown",
-		"Gaithersburg", "Rockville",
-		"Silver Spring",
-		"Washington D.C."
-	];
+  var availableCities = <%=raw City.all.pluck(:name) %>;
 	$( "#cities" ).autocomplete({
 		source: availableCities
 	});
